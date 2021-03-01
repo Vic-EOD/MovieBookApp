@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Book</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1 class="text-center">Is It Based On A Book?</h1>
+    <p class="text-start ms-3">
+      Search for a movie to see if it's based on a book.
+    </p>
+    <form class="row" id="searchForm">
+      <div class="m-3 col-md-6">
+        <label class="form-label" for="searchQuery">Movie Title:</label>
+        <input
+          class="form-control mb-3"
+          id="movieInput"
+          type="text"
+          name="searchQuery"
+          placeholder="Movie Title"
+        />
+        <button type="submit" class="btn btn-secondary">Search</button>
+      </div>
+    </form>
+
+    <script src="app.js"></script>
+  </body>
+</html>
