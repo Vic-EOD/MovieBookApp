@@ -14,22 +14,24 @@
   </head>
   <body>
     <h1 class="text-center">Is It Based On A Book?</h1>
-    <p class="text-start ms-3">
+    <p class="text-center ms-3">
       Search for a movie to see if it's based on a book.
     </p>
-    <form class="row" id="searchForm">
-      <div class="m-3 col-md-6">
-        <label class="form-label" for="searchQuery">Movie Title:</label>
-        <input
-          class="form-control mb-3"
-          id="movieInput"
-          type="text"
-          name="searchQuery"
-          placeholder="Movie Title"
-        />
-        <button type="submit" class="btn btn-secondary">Search</button>
-      </div>
-    </form>
+    <div class="container">
+      <form class="row justify-content-center" id="searchForm">
+        <div class="m-3 col-md-6">
+          <label class="form-label" for="searchQuery">Movie Title:</label>
+          <input
+            class="form-control mb-3"
+            id="movieInput"
+            type="text"
+            name="searchQuery"
+            placeholder="Movie Title"
+          />
+          <button type="submit" class="btn btn-secondary">Search</button>
+        </div>
+      </form>
+    </div>
 
     <script src="app.js"></script>
   </body>

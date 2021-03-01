@@ -30,11 +30,6 @@ const createImages = (movies) => {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add("container");
   cardContainer.id = "cardContainer";
-  // for (let movie of movies) {
-  //   if (movie.Poster !== "N/A") {
-  //     cardContainer.append(createCard(movie));
-  //   }
-  // }
   let row = createRow();
   cardContainer.append(row);
   movies.forEach((movie, i) => {
@@ -52,7 +47,7 @@ const createImages = (movies) => {
 
 const createCard = (movie) => {
   const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card", "m-3", "ms-0", "col-6", "col-md-4");
+  cardDiv.classList.add("card", "m-3", "col-6", "col-md-4");
   cardDiv.style.width = "300px";
 
   const cardImage = document.createElement("img");
@@ -86,6 +81,6 @@ const clearImages = () => {
 
 const createRow = () => {
   const rowDiv = document.createElement("div");
-  rowDiv.classList.add("row");
+  rowDiv.classList.add("row", "justify-content-center");
   return rowDiv;
 };
