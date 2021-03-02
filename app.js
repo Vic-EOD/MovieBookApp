@@ -4,10 +4,10 @@ searchForm.addEventListener("submit", omdbSearch);
 const basedOnBook = (movie) => {
   const regExp = /novel|book|story|characters/i;
   if (regExp.test(movie.Writer)) {
-    console.log("Yes, this movie is based on a book.");
+    console.log(movie.Writer, "Yes, this movie is based on a book.");
     return true;
   } else {
-    console.log("No, this movie is not based on a book.");
+    console.log(movie.Writer, "No, this movie is not based on a book.");
     return false;
   }
 };
@@ -16,14 +16,10 @@ const createImages = (movies) => {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add("container");
   cardContainer.id = "cardContainer";
-  let row = createRow();
-  cardContainer.append(row);
-  movies.forEach((movie, i) => {
-    if (i % 3 === 0) {
-      row = createRow();
-      cardContainer.append(row);
-    }
 
+  const row = createRow();
+  cardContainer.append(row);
+  movies.forEach((movie) => {
     if (movie.Poster !== "N/A") {
       row.append(createCard(movie));
     }
@@ -47,13 +43,16 @@ const createCard = (movie) => {
   cardTitle.classList.add("card-title");
   cardTitle.innerText = movie.Title;
 
-  const cardButton = document.createElement("a");
+  const buttonDiv = document.createElement("div");
+  buttonDiv.classList.add("d-grid", "gap-2", "col-6", "mx-auto", "mt-3");
+  const cardButton = document.createElement("button");
   cardButton.classList.add("btn", "btn-primary");
   cardButton.innerText = "Details";
-  cardButton.href = "#";
+  cardButton.type = "button";
   cardButton.addEventListener("click", omdbTitleSearch);
+  buttonDiv.append(cardButton);
 
-  cardBodyDiv.append(cardTitle, cardButton);
+  cardBodyDiv.append(cardTitle, buttonDiv);
 
   cardDiv.append(cardImage, cardBodyDiv);
   return cardDiv;
@@ -98,6 +97,14 @@ const createDetailedCard = (movie) => {
   listItem2.classList.add("list-group-item");
   listItem2.innerText = `Released ${movie.Released}`;
 
+  const listItem3 = document.createElement("li");
+  listItem3.classList.add("list-group-item");
+  if (basedOnBook(movie)) {
+    listItem3.innerText = "This movie is based on a book.";
+  } else {
+    listItem3.innerText = "This movie is not based on a book.";
+  }
+
   const cardBodyDiv2 = document.createElement("div");
   cardBodyDiv2.classList.add("card-body");
 
@@ -106,12 +113,9 @@ const createDetailedCard = (movie) => {
   imdbLink.innerText = "IMDB Link";
   imdbLink.href = `https://www.imdb.com/title/${movie.imdbID}/`;
 
-  const listItem3 = document.createElement("li");
-  listItem3.classList.add("list-group-item");
-
   cardBodyDiv.append(cardTitle, cardText);
-  list.append(listItem1, listItem2);
   cardBodyDiv2.append(imdbLink);
+  list.append(listItem1, listItem2, listItem3);
   cardDiv.append(cardImage, cardBodyDiv, list, cardBodyDiv2);
   cardContainer.append(cardDiv);
   document.querySelector("#mainContainer").append(cardContainer);
@@ -126,7 +130,7 @@ const clearImages = () => {
 
 const createRow = () => {
   const rowDiv = document.createElement("div");
-  rowDiv.classList.add("row", "justify-content-center");
+  rowDiv.classList.add("row");
   return rowDiv;
 };
 
