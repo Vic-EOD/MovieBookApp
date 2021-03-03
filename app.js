@@ -20,7 +20,7 @@ const createImages = (movies) => {
   const row = createRow();
   cardContainer.append(row);
   movies.forEach((movie) => {
-    if (movie.Poster !== "N/A") {
+    if (movie.Poster !== "N/A" && movie.Type !== "game") {
       row.append(createCard(movie));
     }
   });
@@ -45,7 +45,7 @@ const createCard = (movie) => {
 
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("d-grid", "gap-2", "col-6", "mx-auto", "mt-3");
-  const cardButton = document.createElement("button");
+  const cardButton = document.createElement("a");
   cardButton.classList.add("btn", "btn-primary");
   cardButton.innerText = "Details";
   cardButton.type = "button";
@@ -155,7 +155,7 @@ async function omdbSearch(e) {
 async function omdbTitleSearch(e) {
   try {
     e.preventDefault();
-    const movieTitle = this.previousSibling.innerText;
+    const movieTitle = this.parentElement.previousSibling.innerText;
     const config = { params: { t: movieTitle, plot: "full" } };
     const response = await axios.get(
       "http://www.omdbapi.com/?&apikey=eeca96f7&",
