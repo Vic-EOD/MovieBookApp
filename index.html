@@ -15,11 +15,11 @@
   <body>
     <div class="container" id="mainContainer">
       <h1 class="text-center pt-3">Is It Based On A Book?</h1>
-      <p class="text-center ms-3">
+      <p class="text-center">
         Search for a movie to see if it's based on a book.
       </p>
       <form class="row justify-content-center" id="searchForm">
-        <div class="m-3 col-md-6">
+        <div class="m-3 col-md-8">
           <label class="form-label" for="searchQuery">Search Movie</label>
           <input
             class="form-control mb-3"
@@ -28,7 +28,9 @@
             name="searchQuery"
             placeholder="Movie Title"
           />
-          <button type="submit" class="btn btn-secondary">Search</button>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-secondary">Search</button>
+          </div>
         </div>
       </form>
     </div>
