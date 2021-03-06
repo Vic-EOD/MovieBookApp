@@ -14,7 +14,7 @@ const basedOnBook = (movie) => {
 
 const createImages = (movies) => {
   const cardContainer = document.createElement("div");
-  cardContainer.classList.add("container");
+  cardContainer.classList.add("container", "w-100");
   cardContainer.id = "cardContainer";
 
   const row = createRow();
@@ -34,7 +34,7 @@ const createCard = (movie) => {
 
   const cardImage = document.createElement("img");
   cardImage.src = movie.Poster;
-  cardImage.classList.add("card-img-top");
+  cardImage.classList.add("card-img-top", "mt-2");
 
   const cardBodyDiv = document.createElement("div");
   cardBodyDiv.classList.add("card-body");
@@ -60,20 +60,15 @@ const createCard = (movie) => {
 
 const createDetailedCard = (movie) => {
   const cardContainer = document.createElement("div");
-  cardContainer.classList.add(
-    "container",
-    "w-70",
-    "row",
-    "justify-content-center"
-  );
+  cardContainer.classList.add("container", "row", "justify-content-center");
   cardContainer.id = "cardContainer";
 
   const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card", "w-50", "m-3");
+  cardDiv.classList.add("card", "m-3", "col-md-8");
 
   const cardImage = document.createElement("img");
   cardImage.src = movie.Poster;
-  cardImage.classList.add("card-img-top");
+  cardImage.classList.add("card-img-top", "mt-3");
 
   const cardBodyDiv = document.createElement("div");
   cardBodyDiv.classList.add("card-body");
