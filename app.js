@@ -108,6 +108,12 @@ const createDetailedCard = (movie) => {
   imdbLink.innerText = "IMDB Link";
   imdbLink.href = `https://www.imdb.com/title/${movie.imdbID}/`;
 
+  //for future use with Google Books API
+  // const bookLink = document.createElement("a");
+  // bookLink.classList.add("card-link");
+  // bookLink.innerText = "Book Link";
+  // bookLink.href = `https://www.google.com/books/example`;
+
   cardBodyDiv.append(cardTitle, cardText);
   cardBodyDiv2.append(imdbLink);
   list.append(listItem1, listItem2, listItem3);
