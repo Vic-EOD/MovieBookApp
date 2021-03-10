@@ -71,7 +71,7 @@ const createDetailedCard = (movie) => {
   cardContainer.id = "cardContainer";
 
   const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card", "m-3", "col-md-6");
+  cardDiv.classList.add("card", "m-3", "col-md-6", "bg-dark", "text-light");
 
   const cardImage = document.createElement("img");
   cardImage.src = movie.Poster;
@@ -92,15 +92,15 @@ const createDetailedCard = (movie) => {
   list.classList.add("list-group", "list-group-flush");
 
   const listItem1 = document.createElement("li");
-  listItem1.classList.add("list-group-item");
+  listItem1.classList.add("list-group-item", "bg-transparent");
   listItem1.innerText = `IMDB Rating: ${movie.imdbRating}`;
 
   const listItem2 = document.createElement("li");
-  listItem2.classList.add("list-group-item");
+  listItem2.classList.add("list-group-item", "bg-transparent");
   listItem2.innerText = `Released ${movie.Released}`;
 
   const listItem3 = document.createElement("li");
-  listItem3.classList.add("list-group-item");
+  listItem3.classList.add("list-group-item", "bg-transparent");
   if (basedOnBook(movie)) {
     listItem3.innerText = "This movie is based on a book.";
   } else {
