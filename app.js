@@ -29,22 +29,29 @@ const createImages = (movies) => {
 
 const createCard = (movie) => {
   const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card", "m-3", "col-6", "col-md-4");
+  cardDiv.classList.add(
+    "card",
+    "m-3",
+    "col-6",
+    "col-md-4",
+    "bg-transparent",
+    "border-0"
+  );
   cardDiv.style.width = "18rem";
 
   const cardImage = document.createElement("img");
   cardImage.src = movie.Poster;
-  cardImage.classList.add("card-img-top", "mt-2");
+  cardImage.classList.add("card-img-top", "mt-2", "rounded");
 
   const cardBodyDiv = document.createElement("div");
   cardBodyDiv.classList.add("card-body");
 
   const cardTitle = document.createElement("h5");
-  cardTitle.classList.add("card-title");
+  cardTitle.classList.add("card-title", "text-center", "text-light");
   cardTitle.innerText = movie.Title;
 
   const buttonDiv = document.createElement("div");
-  buttonDiv.classList.add("d-grid", "gap-2", "col-6", "mx-auto", "mt-3");
+  buttonDiv.classList.add("d-grid", "gap-2", "col-6", "mx-auto");
   const cardButton = document.createElement("a");
   cardButton.classList.add("btn", "btn-primary");
   cardButton.innerText = "Details";
@@ -64,7 +71,7 @@ const createDetailedCard = (movie) => {
   cardContainer.id = "cardContainer";
 
   const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card", "m-3", "col-md-8");
+  cardDiv.classList.add("card", "m-3", "col-md-6");
 
   const cardImage = document.createElement("img");
   cardImage.src = movie.Poster;
