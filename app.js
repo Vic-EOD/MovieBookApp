@@ -101,11 +101,6 @@ const createDetailedCard = async (movie) => {
 
   const listItem3 = document.createElement("li");
   listItem3.classList.add("list-group-item", "bg-transparent");
-  if (basedOnBook(movie)) {
-    listItem3.innerText = "This movie is based on a book.";
-  } else {
-    listItem3.innerText = "This movie is not based on a book.";
-  }
 
   const cardBodyDiv2 = document.createElement("div");
   cardBodyDiv2.classList.add("card-body");
@@ -114,9 +109,32 @@ const createDetailedCard = async (movie) => {
   imdbLink.classList.add("card-link");
   imdbLink.innerText = "IMDB Link";
   imdbLink.href = `https://www.imdb.com/title/${movie.imdbID}/`;
+  if (basedOnBook(movie)) {
+    listItem3.innerText = "This movie is based on a book.";
+    const config = {
+      params: {
+        q: movie.Title,
+        key: "AIzaSyB2CRxAEcrVSEweKyeOYB7fksPveAVj2E0",
+      },
+    };
+    const response = await axios.get(
+      "https://www.googleapis.com/books/v1/volumes?",
+      config
+    );
+    console.dir(response);
+    const book = response.data.items[0];
+    console.dir(book);
+    const bookLink = document.createElement("a");
+    bookLink.classList.add("card-link");
+    bookLink.innerText = "Book Link";
+    bookLink.href = book.volumeInfo.infoLink;
+    cardBodyDiv2.append(imdbLink, bookLink);
+  } else {
+    listItem3.innerText = "This movie is not based on a book.";
+    cardBodyDiv2.append(imdbLink);
+  }
 
   cardBodyDiv.append(cardTitle, cardText);
-  cardBodyDiv2.append(imdbLink);
   list.append(listItem1, listItem2, listItem3);
   cardDiv.append(cardImage, cardBodyDiv, list, cardBodyDiv2);
   cardContainer.append(cardDiv);
