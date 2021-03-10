@@ -1,3 +1,4 @@
+const { omdbKey, gbooksKey } = require("./api");
 const searchForm = document.querySelector("#searchForm");
 searchForm.addEventListener("submit", omdbSearch);
 
@@ -114,16 +115,14 @@ const createDetailedCard = async (movie) => {
     const config = {
       params: {
         q: movie.Title,
-        key: "AIzaSyB2CRxAEcrVSEweKyeOYB7fksPveAVj2E0",
+        key: gbooksKey,
       },
     };
     const response = await axios.get(
       "https://www.googleapis.com/books/v1/volumes?",
       config
     );
-    console.dir(response);
     const book = response.data.items[0];
-    console.dir(book);
     const bookLink = document.createElement("a");
     bookLink.classList.add("card-link");
     bookLink.innerText = "Book Link";
@@ -160,7 +159,7 @@ async function omdbSearch(e) {
     const searchTerm = searchForm.elements.searchQuery.value;
     const config = { params: { s: searchTerm } };
     const response = await axios.get(
-      "http://www.omdbapi.com/?&apikey=eeca96f7&",
+      `http://www.omdbapi.com/?&apikey=${omdbKey}`,
       config
     );
     const movies = response.data.Search;
@@ -178,7 +177,7 @@ async function omdbTitleSearch(e) {
     const movieTitle = this.parentElement.previousSibling.innerText;
     const config = { params: { t: movieTitle, plot: "full" } };
     const response = await axios.get(
-      "http://www.omdbapi.com/?&apikey=eeca96f7&",
+      `http://www.omdbapi.com/?&apikey=${omdbKey}`,
       config
     );
     const movie = response.data;

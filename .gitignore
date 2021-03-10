@@ -4,3 +4,5 @@ Scraping
 package-lock.json
 .env
 test.js
+api.js
+bundle.js
