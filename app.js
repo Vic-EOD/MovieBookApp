@@ -65,7 +65,7 @@ const createCard = (movie) => {
   return cardDiv;
 };
 
-const createDetailedCard = (movie) => {
+const createDetailedCard = async (movie) => {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add("container", "row", "justify-content-center");
   cardContainer.id = "cardContainer";
@@ -114,12 +114,6 @@ const createDetailedCard = (movie) => {
   imdbLink.classList.add("card-link");
   imdbLink.innerText = "IMDB Link";
   imdbLink.href = `https://www.imdb.com/title/${movie.imdbID}/`;
-
-  //for future use with Google Books API
-  // const bookLink = document.createElement("a");
-  // bookLink.classList.add("card-link");
-  // bookLink.innerText = "Book Link";
-  // bookLink.href = `https://www.google.com/books/example`;
 
   cardBodyDiv.append(cardTitle, cardText);
   cardBodyDiv2.append(imdbLink);
