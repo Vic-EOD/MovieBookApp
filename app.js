@@ -72,7 +72,14 @@ const createDetailedCard = async (movie) => {
   cardContainer.id = "cardContainer";
 
   const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card", "m-3", "col-md-6", "bg-dark", "text-light");
+  cardDiv.classList.add(
+    "card",
+    "m-3",
+    "col-md-6",
+    "bg-transparent",
+    "border-0",
+    "text-light"
+  );
 
   const cardImage = document.createElement("img");
   cardImage.src = movie.Poster;
