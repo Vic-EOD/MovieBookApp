@@ -125,8 +125,8 @@ const createDetailedCard = async (movie) => {
   cardBodyDiv2.classList.add("card-body");
 
   const imdbLink = document.createElement("a");
-  imdbLink.classList.add("card-link");
-  imdbLink.innerText = "IMDB Link";
+  imdbLink.classList.add("card-link", "icon");
+  imdbLink.innerHTML = '<img src="imdb.svg" class="icon">';
   imdbLink.href = `https://www.imdb.com/title/${movie.imdbID}/`;
   if (basedOnBook(movie)) {
     listItem3.innerText = "This movie is based on a book.";
