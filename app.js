@@ -82,7 +82,7 @@ const createDetailedCard = async (movie) => {
   );
 
   const rowDiv = document.createElement("div");
-  rowDiv.classList.add("row", "gx-1");
+  rowDiv.classList.add("row", "g-0");
 
   const col1Div = document.createElement("div");
   col1Div.classList.add("col-md-4");
@@ -100,7 +100,7 @@ const createDetailedCard = async (movie) => {
   cardBodyDiv.classList.add("card-body");
 
   const cardTitle = document.createElement("h5");
-  cardTitle.classList.add("card-title");
+  cardTitle.classList.add("card-title", "text-center");
   cardTitle.innerText = movie.Title;
 
   const cardText = document.createElement("p");
