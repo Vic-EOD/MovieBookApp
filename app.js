@@ -75,15 +75,26 @@ const createDetailedCard = async (movie) => {
   cardDiv.classList.add(
     "card",
     "m-3",
-    "col-md-6",
+    "col-md-10",
     "bg-transparent",
     "border-0",
     "text-light"
   );
 
+  const rowDiv = document.createElement("div");
+  rowDiv.classList.add("row", "gx-1");
+
+  const col1Div = document.createElement("div");
+  col1Div.classList.add("col-md-4");
+
   const cardImage = document.createElement("img");
   cardImage.src = movie.Poster;
-  cardImage.classList.add("card-img-top", "mt-3");
+  cardImage.classList.add("card-img");
+
+  col1Div.append(cardImage);
+
+  const col2Div = document.createElement("div");
+  col2Div.classList.add("col-md-8");
 
   const cardBodyDiv = document.createElement("div");
   cardBodyDiv.classList.add("card-body");
@@ -132,7 +143,7 @@ const createDetailedCard = async (movie) => {
     const book = response.data.items[0];
     const bookLink = document.createElement("a");
     bookLink.classList.add("card-link");
-    bookLink.innerText = "Book Link";
+    bookLink.innerText = "Book Info";
     bookLink.href = book.volumeInfo.infoLink;
     cardBodyDiv2.append(imdbLink, bookLink);
   } else {
@@ -142,7 +153,9 @@ const createDetailedCard = async (movie) => {
 
   cardBodyDiv.append(cardTitle, cardText);
   list.append(listItem1, listItem2, listItem3);
-  cardDiv.append(cardImage, cardBodyDiv, list, cardBodyDiv2);
+  col2Div.append(cardBodyDiv, list, cardBodyDiv2);
+  rowDiv.append(col1Div, col2Div);
+  cardDiv.append(rowDiv);
   cardContainer.append(cardDiv);
   document.querySelector("#mainContainer").append(cardContainer);
 };
