@@ -5,10 +5,8 @@ searchForm.addEventListener("submit", omdbSearch);
 const basedOnBook = (movie) => {
   const regExp = /novel|book|story|characters/i;
   if (regExp.test(movie.Writer)) {
-    console.log(movie.Writer, "Yes, this movie is based on a book.");
     return true;
   } else {
-    console.log(movie.Writer, "No, this movie is not based on a book.");
     return false;
   }
 };
@@ -175,8 +173,10 @@ const createRow = () => {
 
 async function omdbSearch(e) {
   try {
-    e.preventDefault();
-    const searchTerm = searchForm.elements.searchQuery.value;
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    const searchTerm = searchForm.elements.searchQuery.value || e;
     const config = { params: { s: searchTerm } };
     const response = await axios.get(
       `http://www.omdbapi.com/?&apikey=${omdbKey}`,
@@ -186,15 +186,24 @@ async function omdbSearch(e) {
     clearImages();
     createImages(movies);
     searchForm.elements.searchQuery.value = "";
-  } catch (e) {
-    console.log("Error!", e);
+    state.page = "search";
+    state.query = searchTerm;
+    state.movie = {};
+    console.dir(state);
+    if (e.preventDefault) {
+      history.pushState(state, "");
+    }
+  } catch (error) {
+    console.log("Error!", error);
   }
 }
 
 async function omdbTitleSearch(e) {
   try {
-    e.preventDefault();
-    const movieTitle = this.parentElement.previousSibling.innerText;
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    const movieTitle = e.Title || this.parentElement.previousSibling.innerText;
     const config = { params: { t: movieTitle, plot: "full" } };
     const response = await axios.get(
       `http://www.omdbapi.com/?&apikey=${omdbKey}`,
@@ -203,7 +212,25 @@ async function omdbTitleSearch(e) {
     const movie = response.data;
     clearImages();
     createDetailedCard(movie);
-  } catch (e) {
-    console.log("Error!", e);
+    state.page = "details";
+    state.query = movieTitle;
+    state.movie = movie;
+    console.dir(state);
+    if (e.preventDefault) {
+      history.pushState(state, "");
+    }
+  } catch (error) {
+    console.log("Error!", error);
   }
 }
+
+window.onpopstate = async (e) => {
+  console.dir(e.state);
+  if (e.state.page === "details") {
+    omdbTitleSearch(e.state.movie);
+  } else if (e.state.page === "search") {
+    omdbSearch(e.state.query);
+  } else {
+    history.go();
+  }
+};

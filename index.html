@@ -43,5 +43,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="bundle.js"></script>
+    <script>
+      const state = { page: "home", query: "", movie: {} };
+      history.pushState(state, "");
+    </script>
   </body>
 </html>
