@@ -10,8 +10,8 @@
 */
 
 //api keys, use your own keys
-const omdbKey = secret.OMDBKEY;
-const gbooksKey = secret.GBOOKSKEY;
+const omdbKey = "29f0626d";
+const gbooksKey = "AIzaSyCYFcGBFZAuq24DGjO0oY6QAlWiIv92KE8";
 
 //selecting the search form from the DOM and adding a submit event listener
 const searchForm = document.querySelector("#searchForm");
