@@ -24,6 +24,7 @@
   "dependencies": {
     "jsdom": "^16.4.0",
     "mongoose": "^5.11.18",
+    "mysql2": "^2.2.5",
     "node-fetch": "^2.6.1",
     "underscore": "^1.12.0"
   },

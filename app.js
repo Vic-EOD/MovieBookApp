@@ -1,7 +1,29 @@
+/* 
+  This small applications uses only vanillaJS to select and manipulate the DOM
+  as well as the built in fetch api therefore you do not technically need the 
+  node_modules folder or any of its packages, the only package used here is browserify
+  for using the require() method and that is only to keep api key secret without using
+  a framework
+  The two APIs used are: the OMBD API https://www.omdbapi.com/
+  And: The Google Books API https://developers.google.com/books
+  All stlying is done using BootStrap 5 
+*/
+
+//required files for the api keys
+//only for security for upload to github
+//use your own api keys
 const { omdbKey, gbooksKey } = require("./api");
+
+//selecting the search form from the DOM and adding a submit event listener
 const searchForm = document.querySelector("#searchForm");
 searchForm.addEventListener("submit", omdbSearch);
 
+//function that returns a boolean for whether or not a
+//movie is based on a book
+//the chosen differentiator is whether or not the strings in
+//the regExp variable are contained in the Writer property of
+//the movie JSON from the OMDB API call
+//API call originally happens inside of the omdbSearch function
 const basedOnBook = (movie) => {
   const regExp = /novel|book|story|characters/i;
   if (regExp.test(movie.Writer)) {
@@ -11,6 +33,9 @@ const basedOnBook = (movie) => {
   }
 };
 
+//function that handles creation of all images for
+//the array from the OMDB results, calls function createCard
+//for each card
 const createImages = (movies) => {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add("container", "w-100");
@@ -26,6 +51,9 @@ const createImages = (movies) => {
   document.body.append(cardContainer);
 };
 
+//function for creating and styling the bootstrap card
+//components that consist of an image and movie title from
+//the OMDB API and a button for more details
 const createCard = (movie) => {
   const cardDiv = document.createElement("div");
   cardDiv.classList.add(
@@ -55,6 +83,9 @@ const createCard = (movie) => {
   cardButton.classList.add("btn", "btn-primary");
   cardButton.innerText = "Details";
   cardButton.type = "button";
+
+  //add event listener to the details button, listener
+  //function is omdbTitleSearch
   cardButton.addEventListener("click", omdbTitleSearch);
   buttonDiv.append(cardButton);
 
@@ -64,6 +95,10 @@ const createCard = (movie) => {
   return cardDiv;
 };
 
+//Creates a detailed card that consists of an image, adds a more detailed
+//plot, an imdb rating, the release year, whether or not the movie is
+//based on a book or not, and an imdb link all from the ODB API
+//also adds a link to the book information if it is based on a book
 const createDetailedCard = async (movie) => {
   const cardContainer = document.createElement("div");
   cardContainer.classList.add("container", "row", "justify-content-center");
@@ -126,6 +161,10 @@ const createDetailedCard = async (movie) => {
   imdbLink.classList.add("card-link", "icon");
   imdbLink.innerHTML = '<img src="imdb.svg" class="icon">';
   imdbLink.href = `https://www.imdb.com/title/${movie.imdbID}/`;
+
+  //if the movie is based on a book this adds a book link, else
+  //only adds the string "This movie is not based on a book."
+  //this if block is also the only caller of the google books api
   if (basedOnBook(movie)) {
     listItem3.innerText = "This movie is based on a book.";
     const config = {
@@ -158,6 +197,7 @@ const createDetailedCard = async (movie) => {
   document.querySelector("#mainContainer").append(cardContainer);
 };
 
+//basic function clearing all card containers/images from the DOM
 const clearImages = () => {
   const cardContainer = document.querySelector("#cardContainer");
   if (cardContainer) {
@@ -165,12 +205,17 @@ const clearImages = () => {
   }
 };
 
+//basic function creating a bootstrap row for general use
 const createRow = () => {
   const rowDiv = document.createElement("div");
   rowDiv.classList.add("row");
   return rowDiv;
 };
 
+//main functino for OMDB API search call
+//the paramaters are set up so that the api call returns 10 results
+//the results are then turned into an array and the proper functions
+//are called for clearing and creation of DOM elements
 async function omdbSearch(e) {
   try {
     if (e.preventDefault) {
@@ -198,6 +243,10 @@ async function omdbSearch(e) {
   }
 }
 
+//main functino for OMDB API single movie lookup
+//the paramaters are set up so that the api call only returns one
+//more detailed result
+//the result is then turned into a detailed bootstrap card
 async function omdbTitleSearch(e) {
   try {
     if (e.preventDefault) {
@@ -224,6 +273,7 @@ async function omdbTitleSearch(e) {
   }
 }
 
+//handling of states/history
 window.onpopstate = async (e) => {
   console.dir(e.state);
   if (e.state.page === "details") {
