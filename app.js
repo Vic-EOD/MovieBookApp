@@ -9,10 +9,9 @@
   All stlying is done using BootStrap 5 
 */
 
-//required files for the api keys
-//only for security for upload to github
-//use your own api keys
-const { omdbKey, gbooksKey } = require("./api");
+//api keys, use your own keys
+const omdbKey = secret.OMDBKEY;
+const gbooksKey = secret.GBOOKSKEY;
 
 //selecting the search form from the DOM and adding a submit event listener
 const searchForm = document.querySelector("#searchForm");
