@@ -7,3 +7,4 @@ test.js
 api.js
 bundle.js
 .vscode/
+package.json
