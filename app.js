@@ -1,14 +1,3 @@
-/* 
-  This small applications uses only vanillaJS to select and manipulate the DOM
-  as well as the built in fetch api therefore you do not technically need the 
-  node_modules folder or any of its packages, the only package used here is browserify
-  for using the require() method and that is only to keep api key secret without using
-  a framework
-  The two APIs used are: the OMBD API https://www.omdbapi.com/
-  And: The Google Books API https://developers.google.com/books
-  All stlying is done using BootStrap 5 
-*/
-
 //api keys, use your own keys
 const omdbKey = "29f0626d";
 const gbooksKey = "AIzaSyCYFcGBFZAuq24DGjO0oY6QAlWiIv92KE8";
@@ -242,7 +231,7 @@ async function omdbSearch(e) {
   }
 }
 
-//main functino for OMDB API single movie lookup
+//main function for OMDB API single movie lookup
 //the paramaters are set up so that the api call only returns one
 //more detailed result
 //the result is then turned into a detailed bootstrap card
